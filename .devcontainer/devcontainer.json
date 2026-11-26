@@ -1,0 +1,24 @@
+{
+  "name": "jdf-spec-pilot",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  "postCreateCommand": "python -m pip install -e .",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "redhat.vscode-yaml",
+        "davidanson.vscode-markdownlint"
+      ],
+      "settings": {
+        "yaml.schemas": {
+          "./model/model.schema.json": [
+            "model/elements/*.yaml",
+            "model/resources/*.yaml",
+            "model/messages/*.yaml",
+            "model/enums/*.yaml",
+            "model/types/*.yaml"
+          ]
+        }
+      }
+    }
+  }
+}

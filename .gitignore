@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+build/
+_site/
+dist/
+*.egg-info/
+.pytest_cache/
+
+# Generated import output (regenerate with specbuild import-xsd)
+import/xsd/xjdf/elements/
+import/xsd/xjdf/enums/
+import/xsd/xjdf/types/
+import/xsd/xjdf/manifest.json
+import/roundtrip/
+import/reconcile-report.md

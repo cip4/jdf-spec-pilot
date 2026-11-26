@@ -1,0 +1,20 @@
+# Build configuration. Replaces Build/*.ini from the FrameMaker repository.
+product: CIP4 JDF/XJDF Specification
+variants:
+  jdf:
+    version: "1.9"
+    title: JDF Specification
+  xjdf:
+    version: "2.3"
+    title: XJDF Specification
+  both:
+    version: "1.9+2.3"
+    title: BOTH Specifications
+metadata:
+  author: CIP4 Organization
+  subject: Job Definition Specification for Print Automation
+  copyright: CIP4 Organization, all rights reserved
+source:
+  # FrameMaker source this pilot is evaluated against.
+  repository: cip4/JDF-Specification
+  commit: b524e390

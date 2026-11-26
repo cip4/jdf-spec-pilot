@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cip4.org/jdf-spec-pilot/model.schema.json",
+  "title": "JDF/XJDF specification data model",
+  "description": "Rules for one element, resource, message, enumeration or type definition. Descriptions and prose live in the Markdown spec; this file holds the data model that generates tables, XSD and diagrams.",
+  "type": "object",
+  "required": ["name", "kind"],
+  "additionalProperties": false,
+  "properties": {
+    "name": { "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_.-]*$" },
+    "kind": { "enum": ["element", "resource", "message", "enum", "type"] },
+    "abstract": { "type": "boolean", "default": false },
+    "extends": { "type": ["string", "null"] },
+    "substitutes": { "type": "string" },
+    "context": { "type": "string" },
+    "variants": { "$ref": "#/$defs/variants" },
+    "description": { "type": "string" },
+    "since": { "type": "string" },
+    "deprecated": { "type": "boolean", "default": false },
+    "history": { "type": "array", "items": { "$ref": "#/$defs/history" } },
+    "attributes": { "type": "array", "items": { "$ref": "#/$defs/attribute" } },
+    "elements": { "type": "array", "items": { "$ref": "#/$defs/child" } },
+    "values": { "type": "array", "items": { "$ref": "#/$defs/enumValue" } },
+    "base": { "type": "string" },
+    "itemType": { "type": "string" },
+    "union": { "type": "array", "items": { "type": "string" } },
+    "multiple": { "type": "boolean", "default": false },
+    "facets": { "$ref": "#/$defs/facets" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": { "enum": ["element", "resource", "message"] },
+          "abstract": { "const": false }
+        }
+      },
+      "then": { "anyOf": [{ "required": ["attributes"] }, { "required": ["elements"] }] }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "enum" } } },
+      "then": { "required": ["values"] }
+    }
+  ],
+  "$defs": {
+    "variants": {
+      "description": "Specifications a node belongs to. Defaults to both JDF 1.x and XJDF 2.x.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["jdf", "xjdf"] },
+      "default": ["jdf", "xjdf"]
+    },
+    "history": {
+      "type": "object",
+      "required": ["version", "change"],
+      "additionalProperties": false,
+      "properties": {
+        "version": { "type": "string" },
+        "spec": { "enum": ["jdf", "xjdf"] },
+        "change": { "enum": ["added", "modified", "deprecated", "removed"] },
+        "note": { "type": "string" }
+      }
+    },
+    "attribute": {
+      "type": "object",
+      "required": ["name", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "required": { "type": "boolean", "default": false },
+        "variants": { "$ref": "#/$defs/variants" },
+        "description": { "type": "string" },
+        "default": { "type": "string" },
+        "values": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "from": { "type": "string" },
+            "list": { "type": "array", "items": { "type": "string" } },
+            "multiple": { "type": "boolean", "default": false }
+          }
+        },
+        "history": { "type": "array", "items": { "$ref": "#/$defs/history" } }
+      }
+    },
+    "child": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "cardinality": { "enum": ["1", "?", "+", "*"], "default": "1" },
+        "variants": { "$ref": "#/$defs/variants" },
+        "description": { "type": "string" },
+        "history": { "type": "array", "items": { "$ref": "#/$defs/history" } }
+      }
+    },
+    "enumValue": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "since": { "type": "string" },
+        "deprecated": { "type": "boolean", "default": false },
+        "variants": { "$ref": "#/$defs/variants" }
+      }
+    },
+    "facets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "length": { "type": "string" },
+        "minLength": { "type": "string" },
+        "maxLength": { "type": "string" },
+        "pattern": { "type": "string" },
+        "minInclusive": { "type": "string" },
+        "maxInclusive": { "type": "string" }
+      }
+    }
+  }
+}

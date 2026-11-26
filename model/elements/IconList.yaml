@@ -1,0 +1,8 @@
+name: IconList
+kind: element
+variants: [jdf, xjdf]
+description: A list of Icons.
+elements:
+  - name: Icon
+    cardinality: "+"
+    description: One icon of the list.

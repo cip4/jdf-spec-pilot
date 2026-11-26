@@ -1,0 +1,33 @@
+# Pilot model slice imported from the FrameMaker table
+# "Icon Element" (Resources.fm). Descriptions match the current spec.
+name: Icon
+kind: element
+variants: [jdf, xjdf]
+description: >-
+  Details of an icon representing a Device.
+attributes:
+  - name: BitDepth
+    type: integer
+    required: true
+    description: Bit depth of one color.
+  - name: IconUsage
+    type: enumerations
+    description: >-
+      Icon for the Device status. Any combination of values is allowed.
+    default: all values
+    values:
+      from: DeviceStatus
+  - name: Size
+    type: XYPair
+    required: true
+    description: Height and width of the icon in pixels.
+elements:
+  - name: FileSpec
+    cardinality: "?"
+    variants: [jdf]
+    description: Reference to details of the icon data.
+    history:
+      - version: "1.6"
+        spec: jdf
+        change: modified
+        note: Prior to JDF 1.6, FileSpec had a data type of element.

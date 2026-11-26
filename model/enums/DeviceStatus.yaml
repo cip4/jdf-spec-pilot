@@ -1,0 +1,12 @@
+name: DeviceStatus
+kind: enum
+description: Status of a Device.
+values:
+  - name: Unknown
+    description: No link to the Device exists.
+  - name: Idle
+  - name: Down
+  - name: Setup
+  - name: Running
+  - name: Cleanup
+  - name: Stopped

@@ -1,0 +1,15 @@
+* text=auto eol=lf
+
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+
+*.xsd text
+*.yaml text
+*.yml text
+*.json text
+*.md text
+*.py text
+
+# FrameMaker sources are binary (not used in this repository yet).
+*.fm binary
+*.book binary

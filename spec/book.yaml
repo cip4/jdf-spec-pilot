@@ -1,0 +1,12 @@
+# Reading order for the HTML and PDF builds.
+# Replaces the FrameMaker JDF.book / XJDF.book / Both.book component lists.
+chapters:
+  - title: Resources
+    dir: spec/08-resources
+    files:
+      - Icon.md
+      - IconList.md
+  - title: Enumeration Attributes
+    dir: spec/appendices/enums
+    files:
+      - DeviceStatus.md
